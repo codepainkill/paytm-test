@@ -9,11 +9,11 @@ const password = "Test@123";
 const encodedPassword = encodeURIComponent(password);
 const mongo_uri = `mongodb+srv://${username}:${encodedPassword}@cluster0.0966mvl.mongodb.net/?retryWrites=true&w=majority`;
 
-async function main(){
+async function connectToDatabase(){
     await mongoose.connect(mongo_uri)
 }
 
-main().catch((err)=> console.log(err))
+connectToDatabase().catch((err)=> console.log(err))
 const userSchema = mongoose.Schema;
 
 
@@ -21,11 +21,19 @@ const userSchema = mongoose.Schema;
 
  const user = userSchema({
     username:String,
-    fisrName:String,
-    lastName:String,
+    lastname:String,
     password: String
 })
 
+
+
+
+
+
 const usermodel = mongoose.model("Paytm",user);
 
+module.exports = {
+    usermodel
+}
+  
 //console.log(model)
